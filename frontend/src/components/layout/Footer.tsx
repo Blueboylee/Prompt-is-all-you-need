@@ -2,7 +2,7 @@
 
 import { Box, Container, Typography, Link as MuiLink, Grid, Divider } from '@mui/material';
 import Link from 'next/link';
-
+import { mainRoutes } from '@/utils/routes';
 export default function Footer() {
   // 使用常量年份而不是动态生成，避免客户端和服务器端不一致
   const currentYear = 2025;
@@ -32,18 +32,11 @@ export default function Footer() {
               快速链接
             </Typography>
             <Typography variant="body2" component="div">
-              <MuiLink component={Link} href="/" color="inherit" display="block" sx={{ mb: 1 }}>
-                首页
-              </MuiLink>
-              <MuiLink component={Link} href="/dashboard" color="inherit" display="block" sx={{ mb: 1 }}>
-                仪表盘
-              </MuiLink>
-              <MuiLink component={Link} href="/profile" color="inherit" display="block" sx={{ mb: 1 }}>
-                个人资料
-              </MuiLink>
-              <MuiLink component={Link} href="/about" color="inherit" display="block">
-                关于
-              </MuiLink>
+              {mainRoutes.map((route) => (
+                <MuiLink key={route.text} component={Link} href={route.href} color="inherit" display="block" sx={{ mb: 1 }}>
+                  {route.text}
+                </MuiLink>
+              ))}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>

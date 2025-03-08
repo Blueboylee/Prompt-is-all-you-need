@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { 
   AppBar, 
@@ -17,18 +16,11 @@ import {
   useTheme
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
-import InfoIcon from '@mui/icons-material/Info';
 import Link from 'next/link';
+import { mainRoutes } from '@/utils/routes';
 
-const menuItems = [
-  { text: '首页', href: '/', icon: <HomeIcon /> },
-  { text: '仪表盘', href: '/dashboard', icon: <DashboardIcon /> },
-  { text: '个人资料', href: '/profile', icon: <PersonIcon /> },
-  { text: '关于', href: '/about', icon: <InfoIcon /> },
-];
+// 使用集中管理的路由配置
+const menuItems = mainRoutes;
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
