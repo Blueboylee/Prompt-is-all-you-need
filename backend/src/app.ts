@@ -20,6 +20,10 @@ app.use(express.json()); // JSON解析中间件
 app.use(express.urlencoded({ extended: true })); // URL编码解析中间件
 
 // API路由
+app.get('/', (req, res) => {
+  res.json({ message: '欢迎访问API服务器', documentation: '/api/health' });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
