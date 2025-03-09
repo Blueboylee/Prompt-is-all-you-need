@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { config } from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
+import testRoutes from './routes/testRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 // 加载环境变量
@@ -30,6 +31,9 @@ app.get('/api/health', (req, res) => {
 
 // 用户路由
 app.use('/api/users', userRoutes);
+
+// 测试路由
+app.use('/api/tests', testRoutes);
 
 // 404处理
 app.use(notFound);
