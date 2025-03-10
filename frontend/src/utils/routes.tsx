@@ -18,7 +18,3 @@ export const mainRoutes: RouteItem[] = [
   { text: '个人资料', href: '/profile', icon: <PersonIcon /> },
   { text: '关于', href: '/about', icon: <InfoIcon /> },
 ];
-
-// 可以根据需要添加更多路由配置，例如：
-// export const adminRoutes: RouteItem[] = [ ... ];
-// export const authRoutes: RouteItem[] = [ ... ];
