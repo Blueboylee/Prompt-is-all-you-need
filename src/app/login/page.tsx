@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { TextField, Button } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,13 +42,16 @@ export default function LoginPage() {
         throw new Error(data.error || '登录失败');
       }
 
-      // 登录成功，跳转到仪表盘
       router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : '登录失败');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGitHubLogin = () => {
+    window.location.href = '/api/auth/github';
   };
 
   return (
@@ -94,6 +98,23 @@ export default function LoginPage() {
             sx={{ mt: 2 }}
           >
             {loading ? '登录中...' : '登录'}
+          </Button>
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">或</span>
+            </div>
+          </div>
+          <Button
+            onClick={handleGitHubLogin}
+            variant="outlined"
+            fullWidth
+            size="large"
+            startIcon={<GitHubIcon />}
+          >
+            使用 GitHub 登录
           </Button>
         </form>
       </div>

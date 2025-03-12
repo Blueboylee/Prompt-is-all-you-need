@@ -1,32 +1,33 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { sign } from 'jsonwebtoken';
+import { query } from '@/lib/db';
+
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const REDIRECT_URI = `${process.env.APP_URL}/api/auth/github/callback`;
 
 // POST /api/auth/login
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { username, password } = body;
+    const { provider } = body;
 
-    // 这里应该添加实际的用户验证逻辑
-    // 示例中使用简单的验证
-    if (username === 'admin' && password === 'admin') {
-      // 设置会话cookie
-      cookies().set('auth_token', 'sample_token', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/'
+    if (provider === 'github') {
+      const params = new URLSearchParams({
+        client_id: GITHUB_CLIENT_ID!,
+        redirect_uri: REDIRECT_URI,
+        scope: 'read:user user:email',
+        allow_signup: 'true',
       });
 
-      return NextResponse.json({
-        success: true,
-        user: { id: 1, username: 'admin' }
-      });
+      return NextResponse.redirect(
+        `https://github.com/login/oauth/authorize?${params.toString()}`
+      );
     }
 
     return NextResponse.json(
-      { error: '用户名或密码错误' },
-      { status: 401 }
+      { error: '不支持的登录方式' },
+      { status: 400 }
     );
   } catch (error) {
     console.error('登录失败:', error);

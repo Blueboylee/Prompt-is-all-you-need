@@ -11,8 +11,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/pg": "^8.11.11",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.2.2",
     "pg": "^8.14.0",
     "react": "^19.0.0",
