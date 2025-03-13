@@ -114,7 +114,17 @@ export async function GET(request: Request) {
     // 重定向到前端，携带token
     const redirectUrl = new URL('/auth/github/callback', process.env.APP_URL);
     redirectUrl.searchParams.set('token', token);
-    return NextResponse.redirect(redirectUrl.toString());
+    // 重定向到首页，同时设置cookie
+    const response = NextResponse.redirect(process.env.APP_URL || '/');
+    response.cookies.set({
+      name: 'auth_token',
+      value: token,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 // 7天
+    });
+    return response;
   } catch (error) {
     console.error('GitHub认证错误:', error);
     return NextResponse.redirect(
