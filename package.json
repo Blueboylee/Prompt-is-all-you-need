@@ -13,8 +13,8 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
-    "@types/jsonwebtoken": "^9.0.9",
     "@types/pg": "^8.11.11",
+    "jose": "^6.0.10",
     "jsonwebtoken": "^9.0.2",
     "next": "15.2.2",
     "pg": "^8.14.0",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

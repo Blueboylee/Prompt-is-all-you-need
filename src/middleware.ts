@@ -12,6 +12,7 @@ const publicPaths = [
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  console.log("pathname",pathname);
 
   // 检查是否是公开路由
   if (publicPaths.some(path => pathname.startsWith(path))) {
@@ -20,6 +21,7 @@ export function middleware(request: NextRequest) {
 
   // 获取认证token
   const token = request.cookies.get('auth_token')?.value;
+  console.log("token",token);
 
   if (!token) {
     // 如果是API请求，返回401状态码
@@ -46,6 +48,7 @@ export function middleware(request: NextRequest) {
 // 配置需要进行中间件处理的路由
 export const config = {
   matcher: [
+    '/',
     '/dashboard/:path*',
     '/settings/:path*',
     '/api/((?!auth/login|auth/github).*)'

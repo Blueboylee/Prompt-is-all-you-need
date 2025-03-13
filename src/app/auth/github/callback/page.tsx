@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
+import { User } from '@/types/user';
 
 export default function GitHubCallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
-  const { setUser } = useAuthStore();
+  const { login } = useAuthStore();
   useEffect(() => {
     const token = searchParams.get('token');
     if (!token) {
@@ -18,13 +19,19 @@ export default function GitHubCallbackPage() {
       try {
         // 解析JWT令牌
         const tokenData = JSON.parse(atob(token.split('.')[1]));
-        
-        // 更新用户状态
-        setUser({
-          id: tokenData.userId,
+        const user: User = {
+          id: tokenData.id,
           username: tokenData.username,
-          role: tokenData.role,
-        });
+          provider: 'github',
+          provider_id: tokenData.provider_id,
+          created_at: new Date(),
+          updated_at: new Date()
+        };
+        console.log('准备登录的用户信息:', user);
+        console.log('JWT Token:', token);
+        // 使用authStore保存用户信息和token
+        login(user, token);
+        console.log('登录完成');
         
         // 登录成功后跳转到仪表板
         router.push('/');
@@ -34,7 +41,7 @@ export default function GitHubCallbackPage() {
     };
 
     handleGitHubCallback();
-  }, [searchParams.get('token'), router, setUser]);
+  }, [searchParams.get('token'), router, login]);
 
   if (error) {
     return (

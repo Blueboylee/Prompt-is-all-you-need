@@ -1,19 +1,5 @@
 import { query } from '../db';
-
-interface User {
-  id: string;
-  provider: string;
-  provider_id: string;
-  username: string;
-  email?: string;
-  avatar_url?: string;
-  github_profile_url?: string;
-  bio?: string;
-  access_token?: string;
-  refresh_token?: string;
-  created_at: Date;
-  updated_at: Date;
-}
+import { User } from '../../types/user';
 
 // 创建新用户
 export async function createUser(data: Omit<User, 'id' | 'created_at' | 'updated_at'>) {

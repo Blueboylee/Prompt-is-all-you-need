@@ -1,11 +1,6 @@
 import { create, StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
-
-interface User {
-  id: number;
-  username: string;
-  role: string;
-}
+import { User } from '../types/user';
 
 interface AuthState {
   user: User | null;
