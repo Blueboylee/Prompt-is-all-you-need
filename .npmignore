@@ -1,0 +1,30 @@
+# 开发环境文件
+.git
+.gitignore
+.env
+.env.*
+
+# 依赖目录
+node_modules
+
+# 构建输出
+.next
+out
+build
+dist
+
+
+!src/
+# 开发工具配置
+.vscode
+.idea
+
+# 测试文件
+__tests__
+*.test.*
+*.spec.*
+
+# 其他不需要发布的文件
+README.md
+TODO.md
+CHANGELOG.md
