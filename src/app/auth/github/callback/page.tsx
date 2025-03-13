@@ -27,14 +27,14 @@ export default function GitHubCallbackPage() {
         });
         
         // 登录成功后跳转到仪表板
-        router.push('/dashboard');
+        router.push('/');
       } catch (err) {
         setError(err instanceof Error ? err.message : 'GitHub登录失败');
       }
     };
 
     handleGitHubCallback();
-  }, [searchParams.toString(), router, setUser]);
+  }, [searchParams.get('token'), router, setUser]);
 
   if (error) {
     return (
