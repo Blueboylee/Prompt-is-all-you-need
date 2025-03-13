@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { sign } from 'jsonwebtoken';
+import * as jose from 'jose';
 import { query } from '@/lib/db';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
@@ -8,7 +8,6 @@ const REDIRECT_URI = `${process.env.APP_URL}/api/auth/github/callback`;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  //接收到src/app/api/auth/github/route.ts中获取到的code
   const code = searchParams.get('code');
   if (!code) {
     return NextResponse.json({ error: '未收到授权码' }, { status: 400 });
@@ -99,18 +98,18 @@ export async function GET(request: Request) {
     const user = userResult.rows[0];
 
     // 生成JWT令牌
-    const token = sign(
-      {
-        userId: user.id,
-        username: user.username,
-        email: user.email,
-        avatar: user.avatar_url,
-        bio: user.bio,
-        provider: 'github'
-      },
-      process.env.JWT_SECRET!,
-      { expiresIn: '7d' }
-    );
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+    const token = await new jose.SignJWT({
+      userId: user.id,
+      username: user.username,
+      email: user.email,
+      avatar: user.avatar_url,
+      bio: user.bio,
+      provider: 'github'
+    })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setExpirationTime('7d')
+      .sign(secret);
 
     // 重定向到前端，携带token
     const redirectUrl = new URL('/auth/github/callback', process.env.APP_URL);

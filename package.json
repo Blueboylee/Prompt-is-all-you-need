@@ -13,8 +13,10 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
+    "@types/js-cookie": "^3.0.6",
     "@types/pg": "^8.11.11",
     "jose": "^6.0.10",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "next": "15.2.2",
     "pg": "^8.14.0",
@@ -28,6 +30,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "css-loader": "^7.1.2",
+    "less": "^4.2.2",
+    "less-loader": "^12.2.0",
+    "sass": "^1.85.1",
+    "style-loader": "^4.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verify } from 'jsonwebtoken';
+import * as jose from 'jose';
 
 // 不需要验证的路由
 const publicPaths = [
@@ -34,9 +34,19 @@ export function middleware(request: NextRequest) {
 
   try {
     // 验证token
-    verify(token, process.env.JWT_SECRET!);
+    console.log("开始验证token:", token);
+    try {
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+      const decoded = jose.jwtVerify(token, secret);
+      console.log("token验证成功，解码结果:", decoded);
+    } catch (verifyError) {
+      console.error("token验证失败:", verifyError);
+      throw verifyError;
+    }
+    console.log("验证流程结束");
     return NextResponse.next();
   } catch (error) {
+    console.error("中间件错误:", error);
     // token无效
     if (pathname.startsWith('/api/')) {
       return NextResponse.json({ error: 'token无效' }, { status: 401 });
@@ -51,6 +61,6 @@ export const config = {
     '/',
     '/dashboard/:path*',
     '/settings/:path*',
-    '/api/((?!auth/login|auth/github).*)'
+    '/api/((?!auth/login|auth/github).*)',
   ],
 };
