@@ -25,7 +25,7 @@ export async function insertTestDb(data: Omit<TestDb, 'id'>) {
 
 // 获取所有数据
 export async function getAllTestDb() {
-  const selectQuery = 'SELECT * FROM test_db ORDER;';
+  const selectQuery = 'SELECT * FROM test_db ORDER BY id;';
   try {
     const result = await query(selectQuery);
     return result.rows;

@@ -59,7 +59,7 @@ export function middleware(request: NextRequest) {
 // 配置需要进行中间件处理的路由
 export const config = {
   matcher: [
-    '/',
+    // '/', // 根路径
     '/dashboard/:path*',
     '/settings/:path*',
     '/api/((?!auth/login|auth/github).*)',

@@ -3,23 +3,20 @@ import styles from "./index.module.scss";
 
 export function Hero() {
   return (
-    <main className={styles.hero}>
+    <main className={styles.hero} style={{ paddingTop: "5rem" }}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <h1>Discover and Find Your Own Fashion!</h1>
-          <p>Explore our curated collection of stylish clothing and accessories tailored to your unique taste.</p>
-          <button className={styles.exploreButton}>
-            EXPLORE NOW
+          <h1>
+            Generate your outfits
+            <br />
+            Using <span className={styles.highlight}>STYLE-AI</span>
+          </h1>
+          <button className={styles.startButton}>
+            Start
           </button>
         </div>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/fashion-model.jpg"
-            alt="Fashion model"
-            width={500}
-            height={600}
-            priority
-          />
+        <div className={styles.imageGrid}>
+
         </div>
       </div>
     </main>

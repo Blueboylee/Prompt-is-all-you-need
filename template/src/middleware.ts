@@ -21,6 +21,7 @@ export function middleware(request: NextRequest) {
 
   // 获取认证token
   const token = request.cookies.get('auth_token')?.value;
+  console.log(request);
   console.log("token",token);
 
   if (!token) {
@@ -58,7 +59,7 @@ export function middleware(request: NextRequest) {
 // 配置需要进行中间件处理的路由
 export const config = {
   matcher: [
-    '/',
+    // '/', // 根路径
     '/dashboard/:path*',
     '/settings/:path*',
     '/api/((?!auth/login|auth/github).*)',

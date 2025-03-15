@@ -5,12 +5,11 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logo}>Fashion Store</div>
+        <div className={styles.logo}>Style-AI</div>
         <nav className={styles["nav-links"]}>
-          <Link href="/">Home</Link>
-          <Link href="/dashboard">dashboard</Link>
+          <Link href="/dashboard">Dashboard</Link>
+          <Link href="/login">Login</Link>
           <Link href="/settings">Setting</Link>
-          <Link href="/contact">Contact</Link>
         </nav>
       </div>
     </header>

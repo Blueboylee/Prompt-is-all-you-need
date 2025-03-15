@@ -1,6 +1,6 @@
 {
   "name": "create-prompt-is-all-you-need",
-  "version": "0.1.8",
+  "version": "0.1.17",
   "private": false,
   "bin": {
     "create-prompt-is-all-you-need": "bin/cli.js"

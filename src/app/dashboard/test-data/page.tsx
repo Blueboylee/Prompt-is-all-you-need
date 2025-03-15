@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 
 interface TestData {
   id: number;
-  // 根据实际数据结构添加其他字段
+  name: string;
+  description:string;
 }
 
 export default function TestDataPage() {
@@ -46,7 +47,8 @@ export default function TestDataPage() {
         {data.map((item) => (
           <div key={item.id} className="border p-4 rounded-lg shadow">
             <p>ID: {item.id}</p>
-            {/* 根据实际数据结构添加其他字段的显示 */}
+            <p>Name: {item.name}</p>
+            <p>Description: {item.description}</p>
           </div>
         ))}
       </div>
