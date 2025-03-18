@@ -6,9 +6,6 @@ import { TextField, Button } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 
-
-
-
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
