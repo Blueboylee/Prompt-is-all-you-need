@@ -33,6 +33,7 @@ export const createCompletion = async (prompt: string, options?: {
   return response.data;
 };
 
+
 export const createChatCompletion = async (messages: Array<{
   role: 'system' | 'user' | 'assistant';
   content: string;
