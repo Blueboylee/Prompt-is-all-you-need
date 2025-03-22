@@ -19,10 +19,6 @@ export async function query(text: string, params?: any[]) {
   }
 }
 
-
-
-
-
 // 获取单个连接（用于事务等需要保持连接的操作）
 export async function getClient() {
   const client = await pool.connect();
