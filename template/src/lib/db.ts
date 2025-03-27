@@ -25,6 +25,7 @@ export async function getClient() {
   const client = await pool.connect();
   return client;
 }
+
 // 测试数据库连接
 export async function testConnection() {
   try {
